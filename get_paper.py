@@ -22,13 +22,14 @@ def label_paper(paper_id = None, paper_meta = None, cased_regexes = None, featur
   """
   if not os.path.isfile(f'papers/{paper_id}.pdf'):
     os.makedirs(f'papers/', exist_ok=True)
-    try:
-      urllib.request.urlretrieve(f'https://www.aclweb.org/anthology/{paper_id}.pdf', f'papers/{paper_id}.pdf')
-      # time.sleep(2) # maybe we would wait some time until downloading processing finishes.
-      os.system(f'pdftotext papers/{paper_id}.pdf papers/{paper_id}.txt')
-    except:
-      print(f'WARNING: Error while downloading/processing https://www.aclweb.org/anthology/{paper_id}.pdf')
-      return
+    # try:
+    urllib.request.urlretrieve(f'https://www.aclweb.org/anthology/{paper_id}.pdf', f'papers/{paper_id}.pdf')
+    time.sleep(2) # maybe we would wait some time until downloading processing finishes.
+    os.system(f'pdftotext papers/{paper_id}.pdf papers/{paper_id}.txt')
+    print('1')
+    # except:
+    #   print(f'WARNING: Error while downloading/processing https://www.aclweb.org/anthology/{paper_id}.pdf')
+    #   return
 
   with open(f'papers/{paper_id}.txt', 'r') as f:
     paper_text = '\n'.join(f.readlines())
